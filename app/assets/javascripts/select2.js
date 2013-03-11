@@ -18,6 +18,7 @@ Apache License or the GPL Licesnse is distributed on an "AS IS" BASIS, WITHOUT W
 CONDITIONS OF ANY KIND, either express or implied. See the Apache License and the GPL License for
 the specific language governing permissions and limitations under the Apache License and the GPL License.
 */
+
  (function ($) {
  	if(typeof $.fn.each2 == "undefined"){
  		$.fn.extend({
@@ -671,6 +672,10 @@ the specific language governing permissions and limitations under the Apache Lic
                     this.selectHighlighted(e);
                 }
             }));
+
+            // Fix the label so it leads to the field
+            var labels = $('label[for="' + opts.element.attr("id") + '"]');
+            labels.prop('for', $(this.container).find('input.select2-input').attr('id'));
 
             // trap all mouse events from leaving the dropdown. sometimes there may be a modal that is listening
             // for mouse events outside of itself so it can close itself. since the dropdown is now outside the select2's
@@ -1557,7 +1562,7 @@ the specific language governing permissions and limitations under the Apache Lic
                 "<input class='select2-focusser select2-offscreen' type='text'/>",
                 "<div class='select2-drop' style='display:none'>" ,
                 "   <div class='select2-search'>" ,
-                "       <input type='text' autocomplete='off' class='select2-input'/>" ,
+                "       <input type='text' autocomplete='off' class='select2-input' id='s2id_autogen" + nextUid() + "'/>" ,
                 "   </div>" ,
                 "   <ul class='select2-results'>" ,
                 "   </ul>" ,
@@ -1997,7 +2002,7 @@ the specific language governing permissions and limitations under the Apache Lic
                 "    <ul class='select2-choices'>",
                 //"<li class='select2-search-choice'><span>California</span><a href="javascript:void(0)" class="select2-search-choice-close"></a></li>" ,
                 "  <li class='select2-search-field'>" ,
-                "    <input type='text' autocomplete='off' class='select2-input'>" ,
+                "    <input type='text' autocomplete='off' class='select2-input' id='s2id_autogen" + nextUid() + "'>" ,
                 "  </li>" ,
                 "</ul>" ,
                 "<div class='select2-drop select2-drop-multi' style='display:none;'>" ,
